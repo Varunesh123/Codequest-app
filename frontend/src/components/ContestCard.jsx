@@ -1,3 +1,5 @@
+import ReminderButton from "./ReminderButton";
+
 const ContestCard = ({ contest }) => {
   return (
     <div className="border p-4 rounded-xl shadow hover:shadow-md transition">
@@ -12,6 +14,10 @@ const ContestCard = ({ contest }) => {
       >
         Visit
       </a>
+      <ReminderButton
+        contestId={contest._id}
+        contestStartTime={contest.startTime}
+      />
     </div>
   );
 };
