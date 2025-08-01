@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // Make sure react-router-dom is installed
+import { useNavigate } from 'react-router-dom';
 
 const Register = () => {
   const [user, setUser] = useState({

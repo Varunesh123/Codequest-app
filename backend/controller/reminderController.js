@@ -1,6 +1,5 @@
-import Reminder from "../models/Reminder";
-import Contest from "../models/Contest";
-import User from "../models/User";
+import Reminder from "../models/Reminder.js";
+import User from "../models/User.js";
 
 export const setReminder = async(req, res) => {
     try {
