@@ -1,18 +1,21 @@
-import express from 'express';
-import { 
-    registerUser, 
-    loginUser, 
-    addToFavorites, 
-    getUserProfiles
-} from '../controller/userController.js';
-
-import authUser from '../middleware/authMiddleware.js';
-
+// routes/userRoutes.js
+const express = require('express');
 const router = express.Router();
+const UserController = require('../controller/UserController');
+const { authMiddleware } = require('../middleware/authMiddleware');
 
-router.post('/register', registerUser);
-router.post('/login', loginUser);
-router.post('/me', authUser, getUserProfiles);
-router.post('/favorites/:contestId', authUser, addToFavorites);
+// Public routes
+router.post('/register', UserController.register);
+router.post('/login', UserController.login);
+router.post('/forgot-password', UserController.forgotPassword);
+router.post('/reset-password', UserController.resetPassword);
+router.post('/verify-email', UserController.verifyEmail);
 
-export default router;
+// Protected routes
+router.get('/profile', authMiddleware, UserController.getProfile);
+router.put('/profile', authMiddleware, UserController.updateProfile);
+router.put('/preferences', authMiddleware, UserController.updatePreferences);
+router.put('/change-password', authMiddleware, UserController.changePassword);
+router.delete('/account', authMiddleware, UserController.deleteAccount);
+
+module.exports = router;
