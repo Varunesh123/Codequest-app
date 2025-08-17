@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { FaGoogle, FaGithub, FaCode, FaEnvelope, FaShieldAlt } from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [otp, setOtp] = useState(['', '', '', '']);
   const [isOtpSent, setIsOtpSent] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
 
   const handleOtpChange = (index, value) => {
     if (/^[0-9]?$/.test(value)) {
@@ -224,7 +226,10 @@ const Login = () => {
         <div className="text-center mt-6">
           <p className="text-gray-400">
             Don't have an account?{' '}
-            <span className="text-blue-400 hover:text-blue-300 cursor-pointer font-medium">
+            <span 
+              className="text-blue-400 hover:text-blue-300 cursor-pointer font-medium"
+              onClick={() => navigate('/register')}
+            >
               Sign up here
             </span>
           </p>

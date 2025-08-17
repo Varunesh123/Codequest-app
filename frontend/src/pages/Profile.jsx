@@ -15,11 +15,13 @@ import {
 } from 'react-icons/fa';
 import { BiLaptop } from 'react-icons/bi';
 import { MdCompareArrows } from 'react-icons/md';
+import { useNavigate } from 'react-router-dom';
 
 const Profile = () => {
   const [activeSection, setActiveSection] = useState('home');
   const [isDarkMode, setIsDarkMode] = useState(true);
   const [notifications, setNotifications] = useState(3);
+  const navigate = useNavigate();
 
   const userStats = {
     problemsSolved: 247,
@@ -80,7 +82,10 @@ const Profile = () => {
       default: return 'text-gray-400';
     }
   };
-
+  const handleSignOut = () => {
+    console.log('Sign Out clicked');
+    navigate('/login');
+  };
   return (
     <div className="w-80 h-screen bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 text-white flex flex-col border-r border-slate-700/50 shadow-2xl">
       {/* Header Section */}
@@ -240,10 +245,15 @@ const Profile = () => {
         </div>
 
         {/* Logout Button */}
-        <button className="w-full bg-gradient-to-r from-red-500/20 to-red-600/20 border border-red-500/30 p-4 flex items-center justify-center space-x-3 rounded-xl hover:from-red-500/30 hover:to-red-600/30 cursor-pointer transition-all duration-300 group">
+        <button
+          className="w-full bg-gradient-to-r from-red-500/20 to-red-600/20 border border-red-500/30 p-4 flex items-center justify-center space-x-3 rounded-xl hover:from-red-500/30 hover:to-red-600/30 cursor-pointer transition-all duration-300 group"
+          onClick={handleSignOut}
+        >
           <FaSignOutAlt className="text-lg text-red-400 group-hover:text-red-300 transition-colors" />
-          <span className="font-medium text-red-400 group-hover:text-red-300 transition-colors">Sign Out</span>
-        </button>
+          <span className="font-medium text-red-400 group-hover:text-red-300 transition-colors">
+            Sign Out
+          </span>
+        </button> 
       </div>
     </div>
   );

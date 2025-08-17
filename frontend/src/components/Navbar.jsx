@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { FaBars, FaSignOutAlt } from "react-icons/fa";
+import { FaBars} from "react-icons/fa";
 import Profile from "../pages/Profile";
 
 const Navbar = () => {
@@ -21,10 +21,9 @@ const Navbar = () => {
           />
           <div>
             <h2 className="text-xl font-semibold">Hi Guest 👋</h2>
-            <p className="text-gray-300 font-medium">Good Morning !!</p>
+            <p className="text-gray-300 font-medium">Happy Coding !!</p>
           </div>
         </div>
-        <FaSignOutAlt size={24} className="cursor-pointer" />
       </div>
 
       {/* Sidebar Drawer */}

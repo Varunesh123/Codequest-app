@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { FaGoogle, FaGithub, FaUser, FaEnvelope, FaLock, FaUserPlus, FaEye, FaEyeSlash } from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom';
 
 const Register = () => {
   const [user, setUser] = useState({
@@ -10,12 +11,7 @@ const Register = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [passwordStrength, setPasswordStrength] = useState(0);
-
-  // Simulate navigation (replace with actual useNavigate in your app)
-  const navigate = (path) => {
-    console.log(`Navigating to: ${path}`);
-    // In your actual app: navigate(path);
-  };
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
