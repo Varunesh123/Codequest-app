@@ -1,4 +1,4 @@
-import Contest from "../models/Contest";
+import Contest from "../../models/Contest.js";
 import axios from 'axios';
 
 // controller/GeeksforGeeksController.js

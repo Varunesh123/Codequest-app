@@ -1,8 +1,8 @@
-// routes/userRoutes.js
-const express = require('express');
+import express from 'express';
+import UserController from '../controller/UserController.js';
+import { authMiddleware } from '../middleware/authMiddleware.js';
+
 const router = express.Router();
-const UserController = require('../controller/UserController');
-const { authMiddleware } = require('../middleware/authMiddleware');
 
 // Public routes
 router.post('/register', UserController.register);
@@ -18,4 +18,4 @@ router.put('/preferences', authMiddleware, UserController.updatePreferences);
 router.put('/change-password', authMiddleware, UserController.changePassword);
 router.delete('/account', authMiddleware, UserController.deleteAccount);
 
-module.exports = router;
+export const userRoutes = router;

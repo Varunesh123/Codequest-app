@@ -17,7 +17,7 @@ const connectDB = async () => {
     // Modern MongoDB connection options (only supported ones)
     const conn = await mongoose.connect(process.env.MONGODB_URI, {
       maxPoolSize: 10, // Maximum number of connections in the connection pool
-      serverSelectionTimeoutMS: 5000, // How long to try selecting a server
+      serverSelectionTimeoutMS: 30000, // How long to try selecting a server
       socketTimeoutMS: 45000, // How long a send or receive on a socket can take
       heartbeatFrequencyMS: 10000, // How often to check the connection
       maxIdleTimeMS: 30000, // Close connections after 30 seconds of inactivity

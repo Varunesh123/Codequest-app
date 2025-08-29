@@ -1,18 +1,20 @@
 // routes/contestRoutes.js
 import express from 'express';
 import ContestController from '../controller/ContestController.js';
-import { authMiddleware } from '../middleware/authMiddleware.js';
+
+import CodeforcesController from '../controller/codingPlateforms/CodeforcesController.js';
+import LeetcodeController from '../controller/codingPlateforms/LeetcodeController.js';
+import CodechefController from '../controller/codingPlateforms/CodechefController.js';
+import GeeksforGeeksController from '../controller/codingPlateforms/GeeksforGeeksController.js';
+import HackerearthController from '../controller/codingPlateforms/HackerearthController.js';
 
 const router = express.Router();
 
-// Public routes
-router.get('/', ContestController.getAllContests);
-router.get('/upcoming', ContestController.getUpcomingContests);
-router.get('/ongoing', ContestController.getOngoingContests);
-router.get('/stats', ContestController.getPlatformStats);
-router.get('/:id', ContestController.getContestById);
+// Platform-specific contest routes
+// router.get('/codeforces/contests', CodeforcesController.getContests);
+router.get('/leetcode', LeetcodeController.getContests);
+router.get('/codechef', CodechefController.getContests);
+router.get('/geeksforgeeks', GeeksforGeeksController.getContests);
+router.get('/hackerearth', HackerearthController.getContests);
 
-// Protected routes
-router.get('/user/preferred', authMiddleware, ContestController.getUserContests);
-
-export default router;
+export const contestRoutes = router;

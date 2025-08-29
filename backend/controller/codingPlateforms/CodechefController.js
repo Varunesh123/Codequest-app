@@ -1,5 +1,5 @@
 // controller/CodechefController.js
-import Contest from '../models/Contest.js'; // Assuming you have a Contest model
+import Contest from '../../models/Contest.js'; // Assuming you have a Contest model
 import axios from 'axios';
 import * as cheerio from 'cheerio'; // For web scraping CodeChef profiles
 

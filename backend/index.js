@@ -6,12 +6,15 @@ import cron from 'node-cron';
 import connectDB from './config/connectDB.js';
 import dotenv from 'dotenv';
 
-import contestRoutes from './routes/contestRoutes.js';
-import {leetcodeRoutes} from './routes/plateformRoutes.js';
+import {contestRoutes} from './routes/contestRoutes.js';
 import {reminderRoutes} from './routes/reminderRoutes.js';
-import userRoutes from './routes/userRoutes.js';
+import {userRoutes} from './routes/userRoutes.js';
 
 import {authMiddleware} from './middleware/authMiddleware.js';
+import morgan from 'morgan';
+
+// Test Manually by using manual-fetch
+// import debugRoutes from './routes/debug.js';
 
 
 // Configure environment variables
@@ -31,7 +34,7 @@ const io = new Server(server, {
     credentials: true
   }
 });
-
+app.use(morgan('dev'));
 // Enhanced Middleware
 app.use(cors({
   origin: process.env.FRONTEND_URL || "http://localhost:3000",
@@ -46,6 +49,8 @@ app.use((req, res, next) => {
   console.log(`📡 ${req.method} ${req.path} - ${new Date().toISOString()}`);
   next();
 });
+
+// app.use('/api/debug', debugRoutes);
 
 // Database connection
 connectDB();
@@ -74,7 +79,6 @@ app.set('io', io);
 
 // Routes
 app.use('/api/contests', contestRoutes);
-app.use('/api/leetcode', leetcodeRoutes);
 app.use('/api/reminders', authMiddleware, reminderRoutes);
 app.use('/api/users', userRoutes);
 
