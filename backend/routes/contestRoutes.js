@@ -1,6 +1,5 @@
 // routes/contestRoutes.js
 import express from 'express';
-import ContestController from '../controller/ContestController.js';
 
 import CodeforcesController from '../controller/codingPlateforms/CodeforcesController.js';
 import LeetcodeController from '../controller/codingPlateforms/LeetcodeController.js';
@@ -11,7 +10,19 @@ import HackerearthController from '../controller/codingPlateforms/HackerearthCon
 const router = express.Router();
 
 // Platform-specific contest routes
-// router.get('/codeforces/contests', CodeforcesController.getContests);
+// router.get('/codeforces', CodeforcesController.getContests);
+router.get('/codeforces', async (req, res) => {
+    try {
+        const result = await codeforcesController.getAllContests();
+        res.json(result);
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: 'Server error',
+            details: error.message
+        });
+    }
+});
 router.get('/leetcode', LeetcodeController.getContests);
 router.get('/codechef', CodechefController.getContests);
 router.get('/geeksforgeeks', GeeksforGeeksController.getContests);
