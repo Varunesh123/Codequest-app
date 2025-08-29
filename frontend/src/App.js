@@ -9,6 +9,10 @@ import Leetcode from "./pages/CodingPlateforms/LeetcodePage.js";
 import Codechef from "./pages/CodingPlateforms/CodechefPage.js";
 import GeeksForGeeks from "./pages/CodingPlateforms/GeeksForGeeksPage.js";
 import HackerEarth from "./pages/CodingPlateforms/HackerEarthPage.js";
+import QuickPracticePage from "./pages/OtherPages/QuickPracticePage.jsx";
+import BeginnerPage from "./pages/OtherPages/BeginnerPage.jsx";
+import AchievementPage from "./pages/OtherPages/AchievementPage.jsx";
+import DSARoadmap from "./pages/OtherPages/DSARoadmap.jsx";
 
 function App() {
   return (
@@ -24,6 +28,10 @@ function App() {
         <Route path="/codechef" element={<Codechef />} />
         <Route path="/geeksforgeeks" element={<GeeksForGeeks />} />
         <Route path="/hackerearth" element={<HackerEarth />} />
+        <Route path="/practice" element={<QuickPracticePage />} />
+        <Route path="/beginner" element={<BeginnerPage />} />
+        <Route path="/achievements" element={<AchievementPage />} />
+        <Route path="/roadmap" element={<DSARoadmap />} />
       </Routes>
     </Router>
   );

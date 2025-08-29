@@ -1,3 +1,4 @@
+import { useState, useContext } from "react";
 import { FaStar, FaCodeBranch, FaTrophy, FaRocket } from "react-icons/fa";
 import { GiEarthAsiaOceania } from "react-icons/gi";
 import {
@@ -6,15 +7,37 @@ import {
   SiCodechef,
   SiGeeksforgeeks,
 } from "react-icons/si";
+import { useNavigate } from "react-router-dom";
+// import { UserContext } from "../context/UserContext"; // Assuming a UserContext for user data
 
 const Home = () => {
+  const navigate = useNavigate();
+  // const { user } = useContext(UserContext); // Get user data from context
+  const [isProfileOpen, setIsProfileOpen] = useState(false);
+
+  // Extract name from email (e.g., john.doe@example.com -> John Doe)
+  // const userName = user?.email
+  //   ? user.email.split('@')[0].split('.').map(word => 
+  //       word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
+  //     ).join(' ')
+  //   : 'Guest';
+  const userName = "Guest"; // Placeholder until UserContext is set up
   const handleCardClick = (route) => {
     console.log(`Navigating to: ${route}`);
-    // In your actual app, replace this with: navigate(route);
+    navigate(route);
+  };
+
+  // Handle click anywhere on the home page to open profile
+  const handleHomeClick = () => {
+    setIsProfileOpen(true);
+    navigate('/profile', { state: { fromHome: true } }); // Pass state to track navigation
   };
 
   return (
-    <div className="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 min-h-screen text-white font-sans">
+    <div 
+      className="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 min-h-screen text-white font-sans"
+      onClick={handleHomeClick} // Click anywhere to open profile
+    >
       {/* Container with max width and centered */}
       <div className="max-w-7xl mx-auto px-4 py-8 lg:px-8">
         
@@ -24,7 +47,7 @@ const Home = () => {
             Coding Hub
           </h1>
           <p className="text-gray-300 text-lg lg:text-xl max-w-2xl mx-auto">
-            Master data structures, algorithms, and competitive programming with curated resources
+            Welcome, {userName}! Master data structures, algorithms, and competitive programming
           </p>
         </div>
 
@@ -35,28 +58,40 @@ const Home = () => {
             title="Beginner Problems"
             description="Start your coding journey with carefully selected problems"
             gradient="from-yellow-400 to-orange-500"
-            onClick={() => handleCardClick("/beginner")}
+            onClick={(e) => {
+              e.stopPropagation(); // Prevent profile page trigger
+              handleCardClick("/beginner");
+            }}
           />
           <FeatureCard
             icon={<FaCodeBranch size={32} />}
             title="DSA RoadMap"
             description="Structured learning path for data structures & algorithms"
             gradient="from-red-400 to-pink-500"
-            onClick={() => handleCardClick("/roadmap")}
+            onClick={(e) => {
+              e.stopPropagation();
+              handleCardClick("/roadmap");
+            }}
           />
           <FeatureCard
             icon={<FaTrophy size={32} />}
             title="Achievements"
             description="Track your progress and unlock milestones"
             gradient="from-green-400 to-blue-500"
-            onClick={() => handleCardClick("/achievements")}
+            onClick={(e) => {
+              e.stopPropagation();
+              handleCardClick("/achievements");
+            }}
           />
           <FeatureCard
             icon={<FaRocket size={32} />}
             title="Quick Practice"
             description="Daily coding challenges to keep you sharp"
             gradient="from-purple-400 to-indigo-500"
-            onClick={() => handleCardClick("/practice")}
+            onClick={(e) => {
+              e.stopPropagation();
+              handleCardClick("/practice");
+            }}
           />
         </div>
 
@@ -75,7 +110,10 @@ const Home = () => {
               description="Weekly contests and daily challenges"
               color="text-yellow-400"
               participants="2M+"
-              onClick={() => handleCardClick("/leetcode")}
+              onClick={(e) => {
+                e.stopPropagation();
+                handleCardClick("/leetcode");
+              }}
             />
             <ContestCard
               icon={<SiCodeforces size={28} />}
@@ -83,7 +121,10 @@ const Home = () => {
               description="Competitive programming contests"
               color="text-blue-400"
               participants="500K+"
-              onClick={() => handleCardClick("/codeforces")}
+              onClick={(e) => {
+                e.stopPropagation();
+                handleCardClick("/codeforces");
+              }}
             />
             <ContestCard
               icon={<SiCodechef size={28} />}
@@ -91,7 +132,10 @@ const Home = () => {
               description="Monthly challenges and cook-offs"
               color="text-orange-400"
               participants="800K+"
-              onClick={() => handleCardClick("/codechef")}
+              onClick={(e) => {
+                e.stopPropagation();
+                handleCardClick("/codechef");
+              }}
             />
             <ContestCard
               icon={<SiGeeksforgeeks size={28} />}
@@ -99,7 +143,10 @@ const Home = () => {
               description="Practice problems and tutorials"
               color="text-green-400"
               participants="1.5M+"
-              onClick={() => handleCardClick("/geeksforgeeks")}
+              onClick={(e) => {
+                e.stopPropagation();
+                handleCardClick("/geeksforgeeks");
+              }}
             />
             <ContestCard
               icon={<GiEarthAsiaOceania size={28} />}
@@ -107,11 +154,20 @@ const Home = () => {
               description="Hiring challenges and skill tests"
               color="text-indigo-400"
               participants="600K+"
-              onClick={() => handleCardClick("/hackerearth")}
+              onClick={(e) => {
+                e.stopPropagation();
+                handleCardClick("/hackerearth");
+              }}
             />
             
             {/* Add More Platforms Card */}
-            <div className="bg-gradient-to-br from-slate-700 to-slate-600 p-6 rounded-2xl border border-slate-500/50 hover:border-slate-400 transition-all duration-300 cursor-pointer group">
+            <div 
+              className="bg-gradient-to-br from-slate-700 to-slate-600 p-6 rounded-2xl border border-slate-500/50 hover:border-slate-400 transition-all duration-300 cursor-pointer group"
+              onClick={(e) => {
+                e.stopPropagation();
+                handleCardClick("/platforms");
+              }}
+            >
               <div className="flex items-center justify-center h-full">
                 <div className="text-center">
                   <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center mb-4 mx-auto group-hover:scale-110 transition-transform duration-300">
