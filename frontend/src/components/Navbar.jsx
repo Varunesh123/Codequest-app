@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { FaBars} from "react-icons/fa";
 import Profile from "../pages/Profile";
 
 const Navbar = () => {
@@ -14,13 +13,8 @@ const Navbar = () => {
       {/* Navbar */}
       <div className="bg-[#1e293b] text-white flex justify-between items-center px-6 py-4">
         <div className="flex items-center gap-4">
-          <FaBars
-            size={24}
-            className="cursor-pointer"
-            onClick={handleDrawerToggle}
-          />
           <div>
-            <h2 className="text-xl font-semibold">Hi Guest 👋</h2>
+            <h2 className="text-xl font-semibold">Hi Varunesh 👋</h2>
             <p className="text-gray-300 font-medium">Happy Coding !!</p>
           </div>
         </div>

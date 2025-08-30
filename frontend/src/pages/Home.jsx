@@ -1,46 +1,29 @@
-import { useState, useContext } from "react";
-import { FaStar, FaCodeBranch, FaTrophy, FaRocket } from "react-icons/fa";
-import { GiEarthAsiaOceania } from "react-icons/gi";
-import {
-  SiLeetcode,
-  SiCodeforces,
-  SiCodechef,
-  SiGeeksforgeeks,
-} from "react-icons/si";
-import { useNavigate } from "react-router-dom";
-// import { UserContext } from "../context/UserContext"; // Assuming a UserContext for user data
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import {  
+  FaTrophy, 
+  FaCodeBranch, 
+  FaRocket, 
+  FaStar, 
+  FaBell, 
+  FaUser, 
+} from 'react-icons/fa';
+import { 
+  SiLeetcode, 
+  SiCodeforces, 
+  SiCodechef, 
+  SiGeeksforgeeks 
+} from 'react-icons/si';
+import { GiEarthAsiaOceania } from 'react-icons/gi';
 
-const Home = () => {
+const Home = ({ userName = 'Varunesh', reminderEnabled = false, toggleReminder, handlePageNavigation }) => {
   const navigate = useNavigate();
-  // const { user } = useContext(UserContext); // Get user data from context
-  const [isProfileOpen, setIsProfileOpen] = useState(false);
-
-  // Extract name from email (e.g., john.doe@example.com -> John Doe)
-  // const userName = user?.email
-  //   ? user.email.split('@')[0].split('.').map(word => 
-  //       word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
-  //     ).join(' ')
-  //   : 'Guest';
-  const userName = "Guest"; // Placeholder until UserContext is set up
   const handleCardClick = (route) => {
     console.log(`Navigating to: ${route}`);
-    navigate(route);
   };
-
-  // Handle click anywhere on the home page to open profile
-  const handleHomeClick = () => {
-    setIsProfileOpen(true);
-    navigate('/profile', { state: { fromHome: true } }); // Pass state to track navigation
-  };
-
   return (
-    <div 
-      className="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 min-h-screen text-white font-sans"
-      onClick={handleHomeClick} // Click anywhere to open profile
-    >
-      {/* Container with max width and centered */}
-      <div className="max-w-7xl mx-auto px-4 py-8 lg:px-8">
-        
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white">
+      <div className="max-w-7xl mx-auto px-4 py-8 lg:px-8 pb-24">
         {/* Header Section */}
         <div className="text-center mb-12 lg:mb-16">
           <h1 className="text-4xl lg:text-6xl font-bold bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent mb-4">
@@ -49,6 +32,23 @@ const Home = () => {
           <p className="text-gray-300 text-lg lg:text-xl max-w-2xl mx-auto">
             Welcome, {userName}! Master data structures, algorithms, and competitive programming
           </p>
+          
+          {/* Reminder Button */}
+          <div className="flex justify-center mt-6">
+            <button
+              onClick={toggleReminder}
+              className={`
+                flex items-center gap-2 px-6 py-3 rounded-xl font-medium transition-all duration-300 transform hover:scale-105
+                ${reminderEnabled 
+                  ? 'bg-gradient-to-r from-green-500 to-emerald-500 text-white shadow-lg' 
+                  : 'bg-gradient-to-r from-slate-700 to-slate-600 text-gray-300 hover:from-slate-600 hover:to-slate-500'
+                }
+              `}
+            >
+              <FaBell className={reminderEnabled ? 'text-white' : 'text-gray-400'} />
+              {reminderEnabled ? 'Daily Reminder On' : 'Set Daily Reminder'}
+            </button>
+          </div>
         </div>
 
         {/* Top Feature Cards */}
@@ -58,47 +58,35 @@ const Home = () => {
             title="Beginner Problems"
             description="Start your coding journey with carefully selected problems"
             gradient="from-yellow-400 to-orange-500"
-            onClick={(e) => {
-              e.stopPropagation(); // Prevent profile page trigger
-              handleCardClick("/beginner");
-            }}
+            onClick={() => handleCardClick("/beginner")}
           />
           <FeatureCard
             icon={<FaCodeBranch size={32} />}
             title="DSA RoadMap"
             description="Structured learning path for data structures & algorithms"
             gradient="from-red-400 to-pink-500"
-            onClick={(e) => {
-              e.stopPropagation();
-              handleCardClick("/roadmap");
-            }}
+            onClick={() => handleCardClick("/roadmap")}
           />
           <FeatureCard
             icon={<FaTrophy size={32} />}
             title="Achievements"
             description="Track your progress and unlock milestones"
             gradient="from-green-400 to-blue-500"
-            onClick={(e) => {
-              e.stopPropagation();
-              handleCardClick("/achievements");
-            }}
+            onClick={() => handleCardClick("/achievements")}
           />
           <FeatureCard
             icon={<FaRocket size={32} />}
             title="Quick Practice"
             description="Daily coding challenges to keep you sharp"
             gradient="from-purple-400 to-indigo-500"
-            onClick={(e) => {
-              e.stopPropagation();
-              handleCardClick("/practice");
-            }}
+            onClick={() => handleCardClick("/practice")}
           />
         </div>
 
         {/* Contests Section */}
         <div className="mb-8">
           <div className="flex items-center gap-4 mb-8">
-            <h2 className="text-3xl lg:text-4xl font-bold">Contests</h2>
+            <h2 className="text-3xl lg:text-4xl font-bold text-white">Contests</h2>
             <div className="flex-1 h-px bg-gradient-to-r from-blue-500 to-transparent"></div>
           </div>
           
@@ -110,10 +98,7 @@ const Home = () => {
               description="Weekly contests and daily challenges"
               color="text-yellow-400"
               participants="2M+"
-              onClick={(e) => {
-                e.stopPropagation();
-                handleCardClick("/leetcode");
-              }}
+              onClick={() => handleCardClick("/leetcode")}
             />
             <ContestCard
               icon={<SiCodeforces size={28} />}
@@ -121,10 +106,7 @@ const Home = () => {
               description="Competitive programming contests"
               color="text-blue-400"
               participants="500K+"
-              onClick={(e) => {
-                e.stopPropagation();
-                handleCardClick("/codeforces");
-              }}
+              onClick={() => handleCardClick("/codeforces")}
             />
             <ContestCard
               icon={<SiCodechef size={28} />}
@@ -132,10 +114,7 @@ const Home = () => {
               description="Monthly challenges and cook-offs"
               color="text-orange-400"
               participants="800K+"
-              onClick={(e) => {
-                e.stopPropagation();
-                handleCardClick("/codechef");
-              }}
+              onClick={() => handleCardClick("/codechef")}
             />
             <ContestCard
               icon={<SiGeeksforgeeks size={28} />}
@@ -143,10 +122,7 @@ const Home = () => {
               description="Practice problems and tutorials"
               color="text-green-400"
               participants="1.5M+"
-              onClick={(e) => {
-                e.stopPropagation();
-                handleCardClick("/geeksforgeeks");
-              }}
+              onClick={() => handleCardClick("/geeksforgeeks")}
             />
             <ContestCard
               icon={<GiEarthAsiaOceania size={28} />}
@@ -154,24 +130,18 @@ const Home = () => {
               description="Hiring challenges and skill tests"
               color="text-indigo-400"
               participants="600K+"
-              onClick={(e) => {
-                e.stopPropagation();
-                handleCardClick("/hackerearth");
-              }}
+              onClick={() => handleCardClick("/hackerearth")}
             />
             
             {/* Add More Platforms Card */}
             <div 
               className="bg-gradient-to-br from-slate-700 to-slate-600 p-6 rounded-2xl border border-slate-500/50 hover:border-slate-400 transition-all duration-300 cursor-pointer group"
-              onClick={(e) => {
-                e.stopPropagation();
-                handleCardClick("/platforms");
-              }}
+              onClick={() => handleCardClick("/platforms")}
             >
               <div className="flex items-center justify-center h-full">
                 <div className="text-center">
                   <div className="w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center mb-4 mx-auto group-hover:scale-110 transition-transform duration-300">
-                    <span className="text-2xl font-bold">+</span>
+                    <span className="text-2xl font-bold text-white">+</span>
                   </div>
                   <p className="text-lg font-semibold text-gray-100">More Platforms</p>
                   <p className="text-sm text-gray-300 mt-2">Discover additional coding platforms</p>
@@ -191,10 +161,56 @@ const Home = () => {
           </div>
         </div>
       </div>
+
+      {/* Bottom Navigation Bar */}
+      <div className="fixed bottom-0 left-0 right-0 bg-gradient-to-r from-slate-800 via-slate-700 to-slate-800 border-t border-slate-600/50 backdrop-blur-lg">
+        <div className="max-w-7xl mx-auto px-4 py-3">
+          <div className="flex justify-between items-center">
+            <div className="flex items-center gap-6">
+              <button
+                onClick={() => navigate('/profile')}
+                className="flex items-center gap-2 px-4 py-2 bg-blue-500/20 hover:bg-blue-500/30 rounded-lg border border-blue-500/30 transition-all duration-300"
+              >
+                <FaUser className="text-blue-400" />
+                <span className="text-blue-400 font-medium">Profile</span>
+              </button>
+            </div>
+            
+            <div className="text-center">
+              <p className="text-xs text-gray-400 mb-1">Created by</p>
+              <div className="space-y-1">
+                <p className="text-xs text-blue-400 font-medium">VaruneshPathak21@gmail.com</p>
+                <div className="flex items-center gap-3 text-xs">
+                  <span className="text-gray-300">📞 8445620358</span>
+                  <a 
+                    href="https://github.com/Varunesh123" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="text-purple-400 hover:text-purple-300 transition-colors"
+                  >
+                    🔗 Varunesh123@github
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-3">
+              <div className="text-right">
+                <p className="text-xs text-gray-400">Current User</p>
+                <p className="text-sm text-white font-medium">{userName}</p>
+              </div>
+              <div className="w-8 h-8 bg-gradient-to-br from-green-400 to-blue-500 rounded-full flex items-center justify-center">
+                <span className="text-sm font-bold text-white">G</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
 
+// Helper Components
 const FeatureCard = ({ icon, title, description, gradient, onClick }) => (
   <div
     onClick={onClick}

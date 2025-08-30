@@ -13,6 +13,7 @@ import QuickPracticePage from "./pages/OtherPages/QuickPracticePage.jsx";
 import BeginnerPage from "./pages/OtherPages/BeginnerPage.jsx";
 import AchievementPage from "./pages/OtherPages/AchievementPage.jsx";
 import DSARoadmap from "./pages/OtherPages/DSARoadmap.jsx";
+import ProfileSetting from "./pages/ProfileSetting.jsx";
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
         <Route path="/beginner" element={<BeginnerPage />} />
         <Route path="/achievements" element={<AchievementPage />} />
         <Route path="/roadmap" element={<DSARoadmap />} />
+        <Route path="/setting" element={<ProfileSetting />} />
       </Routes>
     </Router>
   );
