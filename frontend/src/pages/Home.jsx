@@ -16,10 +16,11 @@ import {
 } from 'react-icons/si';
 import { GiEarthAsiaOceania } from 'react-icons/gi';
 
-const Home = ({ userName = 'Varunesh', reminderEnabled = false, toggleReminder, handlePageNavigation }) => {
+const Home = ({ userName = localStorage.getItem('userName'), reminderEnabled = false, toggleReminder, handlePageNavigation }) => {
   const navigate = useNavigate();
+  const userEmail = localStorage.getItem('userEmail');
   const handleCardClick = (route) => {
-    console.log(`Navigating to: ${route}`);
+    navigate(route);
   };
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white">
@@ -179,7 +180,7 @@ const Home = ({ userName = 'Varunesh', reminderEnabled = false, toggleReminder, 
             <div className="text-center">
               <p className="text-xs text-gray-400 mb-1">Created by</p>
               <div className="space-y-1">
-                <p className="text-xs text-blue-400 font-medium">VaruneshPathak21@gmail.com</p>
+                <p className="text-xs text-blue-400 font-medium">{userEmail}</p>
                 <div className="flex items-center gap-3 text-xs">
                   <span className="text-gray-300">📞 8445620358</span>
                   <a 

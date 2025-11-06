@@ -38,6 +38,8 @@ const Profile = ({ userStats = {
   const [notifications, setNotifications] = useState(3);
   const [animatedStats, setAnimatedStats] = useState({ problems: 0, streak: 0, score: 0 });
   const navigate = useNavigate();
+
+  const userName = localStorage.getItem('userName');
   // Animate stats on component mount
   useEffect(() => {
     const animateValue = (start, end, duration, key) => {
@@ -110,8 +112,23 @@ const Profile = ({ userStats = {
     setActiveSection(item.id);
   };
 
-  const handleSignOut = () => {
-    console.log('Sign Out clicked');
+  // Client-side logout
+  const handleSignOut = async () => {
+    // try {
+    //   const response = await fetch('/api/users/logout', {
+    //     method: 'POST',
+    //     headers: {
+    //       'Authorization': `Bearer ${token}`
+    //     }
+    //   });
+      
+    //   if (response.ok) {
+    //     localStorage.removeItem('token');
+    //     window.location.href = '/login';
+    //   }
+    // } catch (error) {
+    //   console.error('Logout failed:', error);
+    // }
   };
 
   const renderMainContent = () => {
@@ -154,7 +171,7 @@ const Profile = ({ userStats = {
               </div>
               <div>
                 <h3 className="text-2xl lg:text-3xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent mb-2">
-                  Varunesh Pathak
+                  {userName}
                 </h3>
                 <p className="text-sm lg:text-base text-gray-400 mb-2 lg:mb-3">Full Stack Developer</p>
                 <div className="flex items-center gap-3">

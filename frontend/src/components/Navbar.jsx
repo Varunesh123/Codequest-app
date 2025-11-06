@@ -3,7 +3,8 @@ import Profile from "../pages/Profile";
 
 const Navbar = () => {
   const [drawerOpen, setDrawerOpen] = useState(false);
-
+  const userName = localStorage.getItem('userName') || 'User';
+  
   const handleDrawerToggle = () => {
     setDrawerOpen(!drawerOpen);
   };
@@ -14,7 +15,7 @@ const Navbar = () => {
       <div className="bg-[#1e293b] text-white flex justify-between items-center px-6 py-4">
         <div className="flex items-center gap-4">
           <div>
-            <h2 className="text-xl font-semibold">Hi Varunesh 👋</h2>
+            <h2 className="text-xl font-semibold">Hi {userName} 👋</h2>
             <p className="text-gray-300 font-medium">Happy Coding !!</p>
           </div>
         </div>

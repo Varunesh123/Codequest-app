@@ -2,13 +2,20 @@ import User from '../models/User.js';
 import jwt from 'jsonwebtoken';
 import nodemailer from 'nodemailer';
 import crypto from 'crypto';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 class UserController {
   // Generate JWT token
   static generateToken(userId) {
+    if (!userId) {
+      throw new Error('User ID is required to generate token');
+    }
+    
     return jwt.sign(
       { userId },
-      process.env.JWT_SECRET || 'your-secret-key',
+      process.env.JWT_SECRET || 'varun0905',
       { expiresIn: process.env.JWT_EXPIRES_IN || '7d' }
     );
   }
@@ -16,22 +23,22 @@ class UserController {
   // Register new user
   static async register(req, res) {
     try {
-      const { username, email, password, confirmPassword } = req.body;
+      const { username, email, password } = req.body;
 
       // Validation
-      if (!username || !email || !password || !confirmPassword) {
+      if (!username || !email || !password) {
         return res.status(400).json({
           success: false,
           message: 'All fields are required'
         });
       }
 
-      if (password !== confirmPassword) {
-        return res.status(400).json({
-          success: false,
-          message: 'Passwords do not match'
-        });
-      }
+      // if (password !== confirmPassword) {
+      //   return res.status(400).json({
+      //     success: false,
+      //     message: 'Passwords do not match'
+      //   });
+      // }
 
       if (password.length < 6) {
         return res.status(400).json({
@@ -65,21 +72,21 @@ class UserController {
       await user.save();
 
       // Generate token
-      const token = this.generateToken(user._id);
+      // const token = this.generateToken(user._id);
 
       // Send verification email (optional)
-      try {
-        await this.sendVerificationEmail(user);
-      } catch (emailError) {
-        console.error('Failed to send verification email:', emailError);
-      }
+      // try {
+      //   await this.sendVerificationEmail(user);
+      // } catch (emailError) {
+      //   console.error('Failed to send verification email:', emailError);
+      // }
 
       res.status(201).json({
         success: true,
         message: 'User registered successfully',
         data: {
           user: user.toJSON(),
-          token
+          // token
         }
       });
     } catch (error) {
@@ -136,14 +143,14 @@ class UserController {
       await user.save();
 
       // Generate token
-      const token = this.generateToken(user._id);
+      // const token = this.generateToken(user._id);
 
       res.json({
         success: true,
         message: 'Login successful',
         data: {
           user: user.toJSON(),
-          token
+          // token
         }
       });
     } catch (error) {
@@ -151,6 +158,39 @@ class UserController {
       res.status(500).json({
         success: false,
         message: 'Error during login'
+      });
+    }
+  }
+
+  static async logout(req, res) {
+    try {
+      // Since JWT is stateless, logout is primarily handled client-side
+      // by removing the token from storage. This endpoint can be used for:
+      // - Logging the logout event
+      // - Future token blacklisting implementation
+      // - Clearing server-side sessions if implemented
+      
+      const userId = req.user?._id;
+      
+      if (userId) {
+        // Log the logout event (optional)
+        console.log(`User ${userId} logged out at ${new Date().toISOString()}`);
+        
+        // You can add additional logout logic here, such as:
+        // - Invalidating refresh tokens
+        // - Clearing session data
+        // - Adding token to blacklist
+      }
+
+      res.json({
+        success: true,
+        message: 'Logout successful'
+      });
+    } catch (error) {
+      console.error('Logout error:', error);
+      res.status(500).json({
+        success: false,
+        message: 'Error during logout'
       });
     }
   }

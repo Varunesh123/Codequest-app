@@ -63,7 +63,7 @@ const Register = () => {
       // Simulate API call
       await new Promise(resolve => setTimeout(resolve, 2000));
       
-      const res = await fetch('/api/register', {
+      const res = await fetch('/api/users/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(user),

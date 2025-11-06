@@ -14,13 +14,15 @@ import BeginnerPage from "./pages/OtherPages/BeginnerPage.jsx";
 import AchievementPage from "./pages/OtherPages/AchievementPage.jsx";
 import DSARoadmap from "./pages/OtherPages/DSARoadmap.jsx";
 import ProfileSetting from "./pages/ProfileSetting.jsx";
+import MorePlateformPage from "./pages/OtherPages/MorePlateformPage.jsx";  
 
 function App() {
   return (
     <Router>
       <Navbar />
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Register />} />
+        <Route path="/home" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/profile" element={<Profile />} />
@@ -34,6 +36,7 @@ function App() {
         <Route path="/achievements" element={<AchievementPage />} />
         <Route path="/roadmap" element={<DSARoadmap />} />
         <Route path="/setting" element={<ProfileSetting />} />
+        <Route path="/platforms" element={<MorePlateformPage />} />
       </Routes>
     </Router>
   );
