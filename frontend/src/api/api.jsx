@@ -1,7 +1,8 @@
 import axios from "axios";
 
 const API = axios.create({
-  baseURL: "https://codequest-app-mhzz.onrender.com",
+  // baseURL: "http://localhost:8000/api",
+  baseURL: "https://codequest-app-dhy3.vercel.app/",
 });
 
 export const getContests = () => API.get("/contests");
