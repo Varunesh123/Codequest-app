@@ -1,5 +1,5 @@
 {
-  "proxy": "http://localhost:5000",
+  "proxy": "https://codequest-app-mhzz.onrender.com",
   "name": "frontend",
   "version": "0.1.0",
   "private": true,

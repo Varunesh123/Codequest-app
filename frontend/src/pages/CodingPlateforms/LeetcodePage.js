@@ -40,7 +40,7 @@ const LeetcodePage = () => {
     if (showRefreshing) setRefreshing(true);
     try {
       console.log('Fetching LeetCode contests...');
-      const res = await fetch(`http://localhost:5000/api/contests/leetcode?_=${Date.now()}`, {
+      const res = await fetch(`process.env.REACT_APP_API_URL || 'http://localhost:5000'}/api/contests/leetcode?_=${Date.now()}`, {
         headers: {
           'Cache-Control': 'no-cache'
         }
